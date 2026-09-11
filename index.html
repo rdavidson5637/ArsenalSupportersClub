@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrickfergus Arsenal Supporters' Club — The Programme</title>
+<meta name="description" content="Carrickfergus had an Arsenal supporters' club once. We're bringing it back. Match days at Carrickfergus Cricket Club. Register your interest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f1e9d9;      /* warm newsprint */
+    --paper-2:#e9dfc9;
+    --ink:#161310;        /* warm near-black */
+    --ink-soft:#4a4238;
+    --red:#c8151b;        /* vintage print red */
+    --red-deep:#98070c;
+    --rule:#161310;
+    --faint:rgba(22,19,16,.14);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Fraunces',Georgia,serif;
+    font-optical-sizing:auto;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* paper grain */
+  body::after{
+    content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:'Space Mono',monospace}
+  .caps{text-transform:uppercase;letter-spacing:.14em}
+  .red{color:var(--red)}
+  em, .ital{font-style:italic}
+
+  /* ---------- TOP TICKER / NAV ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);
+    border-bottom:2px solid var(--ink);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:42px}
+  .topbar .mark{font-family:'Bebas Neue';font-size:18px;letter-spacing:.06em}
+  .topbar .mark b{color:var(--red)}
+  .topbar nav{display:flex;gap:26px}
+  .topbar nav a{font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--paper);opacity:.75;transition:opacity .15s}
+  .topbar nav a:hover{opacity:1;color:#fff}
+  .topbar nav a.cta{color:var(--red);opacity:1;font-weight:700}
+  @media(max-width:680px){.topbar nav a:not(.cta){display:none}}
+
+  /* ---------- MASTHEAD / NAMEPLATE ---------- */
+  .masthead{padding:26px 0 0}
+  .masthead .rule-top{border-top:5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+  .kicker-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:11px}
+  .kicker-row span{white-space:nowrap}
+  .nameplate{text-align:center;padding:14px 0 10px;border-bottom:1.5px solid var(--ink)}
+  .nameplate .over{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+  .nameplate h1{
+    font-family:'Bebas Neue',sans-serif;font-weight:400;
+    font-size:clamp(38px,9vw,120px);line-height:.86;letter-spacing:.01em;
+  }
+  .nameplate h1 .red{-webkit-text-stroke:0;color:var(--red)}
+  .nameplate .under{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px;font-size:11px;color:var(--ink-soft)}
+  .nameplate .under .star{color:var(--red)}
+  .thin-rule{border-top:1px solid var(--ink);margin-top:2px}
+  .double-rule{height:4px;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);margin-top:3px}
+
+  /* ---------- LEAD STORY ---------- */
+  .lead{padding:44px 0 30px}
+  .lead-grid{display:grid;grid-template-columns:1.45fr .9fr;gap:44px}
+  @media(max-width:860px){.lead-grid{grid-template-columns:1fr;gap:30px}}
+  .stamp{
+    display:inline-block;font-family:'Bebas Neue';font-size:15px;letter-spacing:.12em;
+    color:var(--red);border:2.5px solid var(--red);border-radius:4px;padding:4px 12px 2px;
+    transform:rotate(-4deg);margin-bottom:20px;
+    box-shadow:2px 2px 0 rgba(200,21,27,.25);
+  }
+  .headline{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,5.6vw,66px);line-height:.98;letter-spacing:-.01em;margin-bottom:8px}
+  .headline .u{background:linear-gradient(var(--red),var(--red)) left bottom/100% 5px no-repeat;padding-bottom:2px}
+  .byline{font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);margin:18px 0 20px;padding-bottom:14px;border-bottom:1px solid var(--faint)}
+  .article{column-count:2;column-gap:32px;font-size:16.5px;color:#241f18}
+  @media(max-width:860px){.article{column-count:1}}
+  .article p{margin-bottom:14px;text-align:justify;hyphens:auto}
+  .article p:first-of-type::first-letter{
+    font-family:'Fraunces';font-weight:900;font-size:74px;line-height:.72;
+    float:left;padding:6px 10px 0 0;color:var(--red);
+  }
+  /* crest column */
+  .crest-box{border:2px solid var(--ink);padding:22px;text-align:center;background:var(--paper-2);position:relative}
+  .crest-box::before{content:"THE CLUB";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--paper-2);padding:0 10px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em}
+  .crest-box svg{width:130px;height:130px;margin:6px auto 14px;display:block}
+  .crest-box .name{font-family:'Bebas Neue';font-size:26px;line-height:.95;letter-spacing:.02em}
+  .crest-box .est{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--ink-soft);margin-top:8px}
+  .halftone{margin-top:16px;height:8px;background-image:radial-gradient(var(--red) 1.1px,transparent 1.3px);background-size:6px 6px;opacity:.8}
+
+  /* ---------- FIXTURES / DETAILS ---------- */
+  section.block{padding:8px 0 46px}
+  .sec-head{display:flex;align-items:center;gap:16px;margin:34px 0 22px}
+  .sec-head h2{font-family:'Bebas Neue';font-size:clamp(26px,4vw,40px);letter-spacing:.03em;white-space:nowrap}
+  .sec-head .line{flex:1;border-top:2px solid var(--ink)}
+  .sec-head .no{font-family:'Space Mono',monospace;font-size:12px;color:var(--red)}
+  .listing{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .row{display:flex;align-items:baseline;gap:12px;padding:15px 4px;border-bottom:1px solid var(--faint)}
+  .row:last-child{border-bottom:none}
+  .row .lbl{font-family:'Bebas Neue';font-size:22px;letter-spacing:.03em;flex:0 0 auto;min-width:150px}
+  .row .dots{flex:1;border-bottom:2px dotted var(--faint);transform:translateY(-4px)}
+  .row .val{font-size:15.5px;color:#241f18;flex:0 0 auto;max-width:56%;text-align:right}
+  .row .val b{font-style:italic}
+  @media(max-width:600px){.row{flex-wrap:wrap}.row .val{text-align:left;max-width:100%}.row .dots{display:none}}
+
+  /* ---------- PULL QUOTE BAND ---------- */
+  .band{background:var(--red);color:var(--paper);text-align:center;padding:54px 0;margin:10px 0 0;position:relative}
+  .band::before,.band::after{content:"";position:absolute;left:0;right:0;height:6px;background-image:radial-gradient(var(--paper) 1.3px,transparent 1.6px);background-size:8px 8px;opacity:.45}
+  .band::before{top:8px}.band::after{bottom:8px}
+  .band q{font-family:'Fraunces';font-style:italic;font-weight:900;font-size:clamp(26px,4.6vw,50px);line-height:1.05;display:block;quotes:none}
+  .band .src{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:18px;opacity:.85}
+
+  /* ---------- MEMBERSHIP COUPON ---------- */
+  .coupon-sec{padding:56px 0}
+  .cut{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--ink-soft);text-align:center;margin-bottom:10px}
+  .coupon{
+    border:2.5px dashed var(--ink);padding:38px 34px;background:var(--paper-2);position:relative;
+  }
+  .coupon .scissor{position:absolute;top:-14px;left:24px;background:var(--paper);padding:0 6px;font-size:20px}
+  .coupon-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  @media(max-width:760px){.coupon-grid{grid-template-columns:1fr;gap:26px}}
+  .coupon h3{font-family:'Bebas Neue';font-size:clamp(30px,5vw,52px);line-height:.92;margin-bottom:12px}
+  .coupon p{font-size:16px;color:#241f18;max-width:44ch}
+  .fields{margin-top:22px;display:flex;flex-direction:column;gap:16px}
+  .field{display:flex;align-items:flex-end;gap:10px}
+  .field label{font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;flex:0 0 auto;padding-bottom:2px}
+  .field .fill{
+    flex:1;border:0;border-bottom:2px solid var(--ink);height:22px;
+    background:transparent;font-family:'Fraunces',Georgia,serif;font-size:15px;
+    color:var(--ink);padding:0 0 2px;border-radius:0;
+  }
+  .field .fill::placeholder{color:var(--ink-soft);opacity:.6;font-family:'Space Mono',monospace;font-size:12px}
+  .field .fill:focus{outline:none;border-bottom-color:var(--red)}
+  .apply{margin-top:8px}
+  #join-status{min-height:1.4em}
+  #join-status.ok{color:var(--red-deep)}
+  #join-status.err{color:var(--red)}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn{
+    display:inline-block;background:var(--ink);color:var(--paper);
+    font-family:'Bebas Neue';font-size:22px;letter-spacing:.06em;
+    padding:14px 30px 11px;border:2px solid var(--ink);cursor:pointer;
+    transition:background .15s,color .15s,transform .1s;
+  }
+  .btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .btn:active{transform:translateY(1px)}
+  .btn.red{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.red:hover{background:var(--ink);border-color:var(--ink)}
+  .coupon .note{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:14px}
+
+  /* ---------- COLOPHON FOOTER ---------- */
+  footer{border-top:5px solid var(--ink);margin-top:20px;padding:34px 0 46px}
+  .colophon{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap}
+  .colophon .blk{max-width:360px}
+  .colophon h4{font-family:'Bebas Neue';font-size:22px;letter-spacing:.03em;margin-bottom:8px}
+  .colophon p{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .colophon .links a{font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:7px;color:var(--ink)}
+  .colophon .links a:hover{color:var(--red)}
+  .smallprint{margin-top:26px;padding-top:16px;border-top:1px solid var(--faint);font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;line-height:1.6}
+
+  /* reveal (subtle, print-appropriate) */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body id="top">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="mark">C<b>A</b>SC · THE PROGRAMME</div>
+    <nav>
+      <a href="#story">The Story</a>
+      <a href="#details">Match Days</a>
+      <a href="#join">Membership</a>
+      <a class="cta" href="#join">Register ▸</a>
+    </nav>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="wrap">
+    <div class="rule-top">
+      <div class="kicker-row mono caps">
+        <span>No. 01 — Founding Issue</span>
+        <span class="red">★ Reviving the Reds of Carrick ★</span>
+        <span id="issdate">Season 2026/27</span>
+      </div>
+    </div>
+    <div class="nameplate">
+      <div class="over">The Official Programme of the</div>
+      <h1>Carrickfergus <span class="red">Arsenal</span><br>Supporters' Club</h1>
+      <div class="under mono caps">
+        <span>Carrickfergus, Co. Antrim</span><span class="star">✦</span>
+        <span>Est. Again MMXXVI</span><span class="star">✦</span>
+        <span>Victoria Concordia Crescit</span>
+      </div>
+    </div>
+    <div class="double-rule"></div>
+  </div>
+</div>
+
+<!-- LEAD STORY -->
+<div class="lead">
+  <div class="wrap lead-grid">
+    <article>
+      <span class="stamp rv">Revival · Vol. I</span>
+      <h1 class="headline rv">Carrickfergus had an Arsenal club once. <span class="u">We're bringing it back.</span></h1>
+      <div class="byline rv">A note from the founders · Carrickfergus · Season 2026/27</div>
+      <div class="article rv">
+        <p>Years ago, this town had its own recognised Arsenal supporters' club, run by a local Gooner named Fred. Somewhere along the line it quietly wound down — and Carrickfergus has been without a home for its Arsenal supporters ever since.</p>
+        <p>That changes now. The Carrickfergus Arsenal Supporters' Club is being re-formed for anyone in the town and the surrounding area who follows the Gunners — a proper, friendly club built around the match day.</p>
+        <p>The plan is straightforward. We gather at a licensed local clubhouse for every game, on the big screen, in good company. We build a real membership. And in time, we apply to Arsenal FC to have the club officially recognised once more — picking up the thread that was dropped.</p>
+        <p>No corporate polish, no promises we can't keep. Just the football, the craic, and the colours — back where they belong.</p>
+      </div>
+    </article>
+    <aside class="crest-box rv">
+      <svg viewBox="0 0 100 108" aria-hidden="true">
+        <path d="M50 4 L92 20 V54 C92 82 72 98 50 104 C28 98 8 82 8 54 V20 Z" fill="none" stroke="#161310" stroke-width="4"/>
+        <path d="M50 4 L92 20 V54 C92 82 72 98 50 104 C28 98 8 82 8 54 V20 Z" fill="#c8151b" opacity="0.08"/>
+        <path d="M28 70 V46 h7 v-9 h9 v9 h9 v-9 h9 v9 h7 V70 Z" fill="#c8151b"/>
+        <rect x="46" y="30" width="8" height="12" fill="#161310"/>
+        <text x="50" y="98" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="#161310" letter-spacing="1">CARRICK</text>
+      </svg>
+      <div class="name">The Gunners<br>of Carrick</div>
+      <div class="est mono">Interim crest · official crest to follow</div>
+      <div class="halftone"></div>
+    </aside>
+  </div>
+</div>
+
+<!-- DETAILS / FIXTURES -->
+<section class="block" id="details">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>The Match-Day Details</h2>
+      <div class="line"></div>
+      <div class="no mono">§ 01</div>
+    </div>
+    <div class="listing rv">
+      <div class="row">
+        <div class="lbl">The Ground</div><div class="dots"></div>
+        <div class="val">Carrickfergus Cricket Club, 22 Middle Road, BT38 9DN — upstairs clubhouse bar. <b>Venue to be confirmed.</b></div>
+      </div>
+      <div class="row">
+        <div class="lbl">The Season</div><div class="dots"></div>
+        <div class="val">October to March — football's peak lines up with cricket's off-season.</div>
+      </div>
+      <div class="row">
+        <div class="lbl">The Fixtures</div><div class="dots"></div>
+        <div class="val">Every Arsenal game we can — home and away — on the big screen.</div>
+      </div>
+      <div class="row">
+        <div class="lbl">Admission</div><div class="dots"></div>
+        <div class="val">All welcome. Families, lifelong reds and new fans alike.</div>
+      </div>
+      <div class="row">
+        <div class="lbl">The Firm</div><div class="dots"></div>
+        <div class="val">A members' group chat, socials, and a club that actually feels like one.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="band">
+  <div class="wrap">
+    <q>One town. One club. One set of colours.</q>
+    <div class="src">The revival starts here</div>
+  </div>
+</div>
+
+<!-- MEMBERSHIP COUPON -->
+<section class="coupon-sec" id="join">
+  <div class="wrap">
+    <div class="cut mono">— — — — — —  CLIP &amp; JOIN  — — — — — —</div>
+    <div class="coupon rv">
+      <span class="scissor">✂</span>
+      <div class="coupon-grid">
+        <div>
+          <h3>Be one of the<br>first back.</h3>
+          <p>We're forming the founding group now. Register your interest and we'll tell you the moment the first match day is confirmed. No commitment — just be part of bringing it back.</p>
+          <div class="note mono">Prefer email? <a href="mailto:ryan@rdevstudio.co.uk" style="text-decoration:underline">ryan@rdevstudio.co.uk</a></div>
+        </div>
+        <form class="fields" id="join-form" action="https://formspree.io/ryan@rdevstudio.co.uk" method="POST">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input class="fill" id="f-name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="f-town">Town</label>
+            <input class="fill" id="f-town" name="town" type="text" autocomplete="address-level2">
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input class="fill" id="f-email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="f-since">Since</label>
+            <input class="fill" id="f-since" name="supporter_since" type="text" placeholder="e.g. 1998, or 'new fan'">
+          </div>
+          <input type="hidden" name="_subject" value="New Carrickfergus Arsenal SC registration">
+          <div class="apply">
+            <button class="btn red" type="submit">Register your interest ▸</button>
+          </div>
+          <p class="note mono" id="join-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <div class="blk">
+        <h4>Carrickfergus Arsenal Supporters' Club</h4>
+        <p>An independent supporters' club reviving the Arsenal's home in Carrickfergus, Co. Antrim. Printed and published by the founders, for the reds of Carrick.</p>
+      </div>
+      <div class="links">
+        <a href="#story">The Story</a>
+        <a href="#details">Match Days</a>
+        <a href="#join">Membership</a>
+      </div>
+    </div>
+    <div class="smallprint">
+      <span>© <span id="yr"></span> Carrickfergus Arsenal Supporters' Club · No. 01</span>
+      <span>Independent club. Not affiliated with or officially recognised by Arsenal Football Club — recognition to be sought once established.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // subtle reveals
+  const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+  // Registration form -> Formspree, kept on-page (no redirect to a hosted
+  // thank-you page). First submission triggers a one-time confirmation
+  // email to ryan@rdevstudio.co.uk from Formspree - click it once and every
+  // submission after that lands straight in the inbox.
+  const joinForm = document.getElementById('join-form');
+  const joinStatus = document.getElementById('join-status');
+  joinForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = joinForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    joinStatus.className = 'note mono';
+    joinStatus.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(joinForm.action, {
+        method: 'POST',
+        body: new FormData(joinForm),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        joinForm.reset();
+        joinStatus.className = 'note mono ok';
+        joinStatus.textContent = "Thanks — you're on the list. We'll be in touch once the first match day is confirmed.";
+      } else {
+        throw new Error('Formspree returned an error');
+      }
+    } catch (err) {
+      joinStatus.className = 'note mono err';
+      joinStatus.textContent = "Something went wrong sending that. Email ryan@rdevstudio.co.uk directly instead.";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
