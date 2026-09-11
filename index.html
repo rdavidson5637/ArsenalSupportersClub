@@ -36,6 +36,17 @@
     --faint:rgba(22,19,16,.14);
     --maxw:1120px;
   }
+  
+  /* Dark mode variables */
+  [data-theme="dark"]{
+    --paper:#1a1a1a;
+    --paper-2:#242424;
+    --paper-3:#2e2e2e;
+    --ink:#e8e4dc;
+    --ink-soft:#a8a49c;
+    --faint:rgba(232,228,220,.14);
+  }
+  
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
@@ -46,12 +57,14 @@
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    transition:background .3s,color .3s;
   }
   /* paper grain */
   body::after{
     content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.05;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+  [data-theme="dark"] body::after{opacity:.03}
   
   /* Skip link for accessibility */
   .skip-link{
@@ -69,6 +82,26 @@
   .red{color:var(--red)}
   em, .ital{font-style:italic}
 
+  /* ---------- NEWS TICKER ---------- */
+  .news-ticker{
+    background:var(--ink);color:var(--paper);
+    overflow:hidden;white-space:nowrap;
+    font-family:'Space Mono',monospace;font-size:11px;
+    letter-spacing:.08em;text-transform:uppercase;
+    padding:6px 0;border-bottom:1px solid var(--red);
+  }
+  .ticker-content{
+    display:inline-block;animation:ticker 30s linear infinite;
+    padding-left:100%;
+  }
+  .ticker-content:hover{animation-play-state:paused}
+  .ticker-content span{margin-right:60px}
+  .ticker-content .bullet{color:var(--red);margin:0 10px}
+  @keyframes ticker{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-100%)}
+  }
+
   /* ---------- TOP TICKER / NAV ---------- */
   .topbar{
     position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);
@@ -83,6 +116,20 @@
   .topbar nav a.cta{color:var(--red);opacity:1;font-weight:700}
   .topbar nav a.active{opacity:1;color:var(--red)}
   
+  /* Theme toggle */
+  .theme-toggle{
+    background:none;border:2px solid var(--paper);color:var(--paper);
+    width:36px;height:36px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    margin-left:16px;transition:background .15s,border-color .15s;
+    flex-shrink:0;
+  }
+  .theme-toggle:hover{background:var(--red);border-color:var(--red)}
+  .theme-toggle svg{width:18px;height:18px}
+  .theme-toggle .sun{display:none}
+  [data-theme="dark"] .theme-toggle .moon{display:none}
+  [data-theme="dark"] .theme-toggle .sun{display:block}
+  
   /* Mobile menu button */
   .menu-btn{
     display:none;background:none;border:none;color:var(--paper);
@@ -91,6 +138,7 @@
   .menu-btn svg{width:24px;height:24px}
   @media(max-width:780px){
     .menu-btn{display:block}
+    .theme-toggle{position:absolute;right:60px}
     .topbar nav{
       position:fixed;top:48px;left:0;right:0;bottom:0;
       background:var(--ink);flex-direction:column;
@@ -157,7 +205,7 @@
   .headline{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,5.6vw,66px);line-height:.98;letter-spacing:-.01em;margin-bottom:8px}
   .headline .u{background:linear-gradient(var(--red),var(--red)) left bottom/100% 5px no-repeat;padding-bottom:2px}
   .byline{font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);margin:18px 0 20px;padding-bottom:14px;border-bottom:1px solid var(--faint)}
-  .article{column-count:2;column-gap:32px;font-size:16.5px;color:#241f18}
+  .article{column-count:2;column-gap:32px;font-size:16.5px;color:var(--ink)}
   @media(max-width:860px){.article{column-count:1}}
   .article p{margin-bottom:14px;text-align:justify;hyphens:auto}
   .article p:first-of-type::first-letter{
@@ -171,6 +219,22 @@
   .crest-box .name{font-family:'Bebas Neue';font-size:26px;line-height:.95;letter-spacing:.02em}
   .crest-box .est{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--ink-soft);margin-top:8px}
   .halftone{margin-top:16px;height:8px;background-image:radial-gradient(var(--red) 1.1px,transparent 1.3px);background-size:6px 6px;opacity:.8}
+
+  /* ---------- MEMBER COUNTER ---------- */
+  .member-counter{
+    text-align:center;padding:30px 20px;background:var(--paper-2);
+    border:2px solid var(--ink);margin-top:30px;
+  }
+  .member-counter .count{
+    font-family:'Bebas Neue';font-size:64px;line-height:1;color:var(--red);
+  }
+  .member-counter .label{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-soft);margin-top:4px;
+  }
+  .member-counter .sublabel{
+    font-size:13px;color:var(--ink-soft);margin-top:8px;
+  }
 
   /* ---------- FIXTURES SECTION ---------- */
   section.block{padding:8px 0 46px}
@@ -215,9 +279,31 @@
   .row:last-child{border-bottom:none}
   .row .lbl{font-family:'Bebas Neue';font-size:22px;letter-spacing:.03em;flex:0 0 auto;min-width:150px}
   .row .dots{flex:1;border-bottom:2px dotted var(--faint);transform:translateY(-4px)}
-  .row .val{font-size:15.5px;color:#241f18;flex:0 0 auto;max-width:56%;text-align:right}
+  .row .val{font-size:15.5px;color:var(--ink);flex:0 0 auto;max-width:56%;text-align:right}
   .row .val b{font-style:italic}
   @media(max-width:600px){.row{flex-wrap:wrap}.row .val{text-align:left;max-width:100%}.row .dots{display:none}}
+
+  /* ---------- MAP SECTION ---------- */
+  .map-container{
+    margin-top:24px;border:2px solid var(--ink);position:relative;
+    background:var(--paper-2);
+  }
+  .map-container::before{
+    content:"FIND US";position:absolute;top:-10px;left:20px;
+    background:var(--paper);padding:0 10px;z-index:5;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;
+  }
+  .map-container iframe{
+    width:100%;height:280px;border:0;display:block;
+    filter:grayscale(100%) contrast(1.1);transition:filter .3s;
+  }
+  .map-container:hover iframe{filter:grayscale(0%)}
+  .map-address{
+    padding:16px 20px;background:var(--paper-2);border-top:1px solid var(--faint);
+    font-family:'Space Mono',monospace;font-size:12px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  }
+  .map-address a{color:var(--red);text-decoration:underline}
 
   /* ---------- HISTORY TIMELINE ---------- */
   .timeline{position:relative;padding:20px 0;margin:20px 0}
@@ -247,6 +333,29 @@
   }
   .timeline-title{font-family:'Bebas Neue';font-size:20px;letter-spacing:.02em;margin:4px 0}
   .timeline-text{font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;
+    margin:24px 0;
+  }
+  .testimonial{
+    background:var(--paper-2);border:2px solid var(--ink);padding:24px;
+    position:relative;
+  }
+  .testimonial::before{
+    content:""";position:absolute;top:10px;left:16px;
+    font-family:'Fraunces';font-size:60px;line-height:1;color:var(--red);opacity:.3;
+  }
+  .testimonial q{
+    display:block;font-size:15px;line-height:1.6;font-style:italic;
+    padding-left:30px;quotes:none;
+  }
+  .testimonial cite{
+    display:block;margin-top:16px;padding-left:30px;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);font-style:normal;
+  }
 
   /* ---------- GALLERY PLACEHOLDER ---------- */
   .gallery-grid{
@@ -302,6 +411,23 @@
   .band q{font-family:'Fraunces';font-style:italic;font-weight:900;font-size:clamp(26px,4.6vw,50px);line-height:1.05;display:block;quotes:none}
   .band .src{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:18px;opacity:.85}
 
+  /* ---------- SHARE BUTTONS ---------- */
+  .share-section{text-align:center;padding:30px 0}
+  .share-label{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:16px;
+  }
+  .share-buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--paper);
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;padding:12px 20px;border:2px solid var(--ink);
+    cursor:pointer;transition:background .15s,border-color .15s;
+  }
+  .share-btn:hover{background:var(--red);border-color:var(--red)}
+  .share-btn svg{width:16px;height:16px;fill:currentColor}
+
   /* ---------- MEMBERSHIP COUPON ---------- */
   .coupon-sec{padding:56px 0}
   .cut{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--ink-soft);text-align:center;margin-bottom:10px}
@@ -312,7 +438,7 @@
   .coupon-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
   @media(max-width:760px){.coupon-grid{grid-template-columns:1fr;gap:26px}}
   .coupon h3{font-family:'Bebas Neue';font-size:clamp(30px,5vw,52px);line-height:.92;margin-bottom:12px}
-  .coupon p{font-size:16px;color:#241f18;max-width:44ch}
+  .coupon p{font-size:16px;color:var(--ink);max-width:44ch}
   .fields{margin-top:22px;display:flex;flex-direction:column;gap:16px}
   .field{display:flex;align-items:flex-end;gap:10px}
   .field label{font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;flex:0 0 auto;padding-bottom:2px}
@@ -328,6 +454,7 @@
   .apply{margin-top:8px}
   #join-status{min-height:1.4em}
   #join-status.ok{color:var(--red-deep)}
+  [data-theme="dark"] #join-status.ok{color:var(--red)}
   #join-status.err{color:var(--red)}
   .btn:disabled{opacity:.55;cursor:default}
   .btn{
@@ -377,6 +504,12 @@
   .back-to-top svg{width:24px;height:24px}
   @media(max-width:600px){.back-to-top{bottom:20px;right:20px;width:44px;height:44px}}
 
+  /* Confetti canvas */
+  #confetti-canvas{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    pointer-events:none;z-index:9999;
+  }
+
   /* reveal (subtle, print-appropriate) */
   .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
   .rv.in{opacity:1;transform:none}
@@ -389,12 +522,46 @@
     vertical-align:middle;margin-right:8px;
   }
   @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ---------- PRINT STYLES ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    body{background:#fff !important}
+    body::after{display:none}
+    .topbar,.news-ticker,.countdown-bar,.back-to-top,.menu-btn,.theme-toggle,
+    .share-section,.map-container iframe{display:none !important}
+    .wrap{max-width:100%;padding:0 20px}
+    .lead-grid,.coupon-grid{grid-template-columns:1fr}
+    .article{column-count:1}
+    .rv{opacity:1 !important;transform:none !important}
+    a[href]::after{content:" (" attr(href) ")";font-size:10px;color:#666}
+    .coupon{border:2px solid #000;page-break-inside:avoid}
+    section.block{page-break-inside:avoid}
+    footer{margin-top:40px}
+  }
 </style>
 </head>
 <body id="top">
 
+<!-- Confetti Canvas -->
+<canvas id="confetti-canvas"></canvas>
+
 <!-- Skip link for accessibility -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NEWS TICKER -->
+<div class="news-ticker" aria-hidden="true">
+  <div class="ticker-content">
+    <span>Welcome to the Founding Issue</span><span class="bullet">●</span>
+    <span>Season 2026/27 kicks off in October</span><span class="bullet">●</span>
+    <span>Register your interest today</span><span class="bullet">●</span>
+    <span>Venue: Carrickfergus Cricket Club (TBC)</span><span class="bullet">●</span>
+    <span>Victoria Concordia Crescit</span><span class="bullet">●</span>
+    <span>Welcome to the Founding Issue</span><span class="bullet">●</span>
+    <span>Season 2026/27 kicks off in October</span><span class="bullet">●</span>
+    <span>Register your interest today</span><span class="bullet">●</span>
+  </div>
+</div>
 
 <!-- TOP BAR -->
 <header class="topbar" role="banner">
@@ -408,6 +575,10 @@
       <a href="#faq">FAQ</a>
       <a class="cta" href="#join">Register ▸</a>
     </nav>
+    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+    </button>
     <button class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
     </button>
@@ -465,14 +636,21 @@
         <p>The plan is straightforward. We gather at a licensed local clubhouse for every game, on the big screen, in good company. We build a real membership. And in time, we apply to Arsenal FC to have the club officially recognised once more — picking up the thread that was dropped.</p>
         <p>No corporate polish, no promises we can't keep. Just the football, the craic, and the colours — back where they belong.</p>
       </div>
+      
+      <!-- Member Counter -->
+      <div class="member-counter rv">
+        <div class="count" id="member-count">0</div>
+        <div class="label">Founding Members</div>
+        <div class="sublabel">Be part of the revival</div>
+      </div>
     </article>
     <aside class="crest-box rv">
       <svg viewBox="0 0 100 108" aria-hidden="true">
-        <path d="M50 4 L92 20 V54 C92 82 72 98 50 104 C28 98 8 82 8 54 V20 Z" fill="none" stroke="#161310" stroke-width="4"/>
+        <path d="M50 4 L92 20 V54 C92 82 72 98 50 104 C28 98 8 82 8 54 V20 Z" fill="none" stroke="currentColor" stroke-width="4"/>
         <path d="M50 4 L92 20 V54 C92 82 72 98 50 104 C28 98 8 82 8 54 V20 Z" fill="#c8151b" opacity="0.08"/>
         <path d="M28 70 V46 h7 v-9 h9 v9 h9 v-9 h9 v9 h7 V70 Z" fill="#c8151b"/>
-        <rect x="46" y="30" width="8" height="12" fill="#161310"/>
-        <text x="50" y="98" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="#161310" letter-spacing="1">CARRICK</text>
+        <rect x="46" y="30" width="8" height="12" fill="currentColor"/>
+        <text x="50" y="98" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="currentColor" letter-spacing="1">CARRICK</text>
       </svg>
       <div class="name">The Gunners<br>of Carrick</div>
       <div class="est mono">Interim crest · official crest to follow</div>
@@ -528,6 +706,21 @@
         <div class="val">A members' group chat, socials, and a club that actually feels like one.</div>
       </div>
     </div>
+    
+    <!-- Map -->
+    <div class="map-container rv">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2308.892!2d-5.8089!3d54.7158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4861a7!2sCarrickfergus%20Cricket%20Club!5e0!3m2!1sen!2suk!4v1"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Carrickfergus Cricket Club location">
+      </iframe>
+      <div class="map-address">
+        <span>22 Middle Road, Carrickfergus BT38 9DN</span>
+        <a href="https://maps.google.com/?q=Carrickfergus+Cricket+Club" target="_blank" rel="noopener">Get directions →</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -564,13 +757,38 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="block" id="voices">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Voices from the Stands</h2>
+      <div class="line"></div>
+      <div class="no mono">§ 04</div>
+    </div>
+    <div class="testimonials rv">
+      <div class="testimonial">
+        <q>Been waiting for something like this since the old club wound down. Carrick needs a proper home for the Gooners again.</q>
+        <cite>— Local supporter, Carrickfergus</cite>
+      </div>
+      <div class="testimonial">
+        <q>Nothing beats watching the game with fellow fans. The atmosphere, the craic — that's what football's about.</q>
+        <cite>— Arsenal supporter since '98</cite>
+      </div>
+      <div class="testimonial">
+        <q>My da took me to Fred's club when I was a kid. Time to pass that on to my own wee ones.</q>
+        <cite>— Second-generation Gooner</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- GALLERY -->
 <section class="block" id="gallery">
   <div class="wrap">
     <div class="sec-head rv">
       <h2>Gallery</h2>
       <div class="line"></div>
-      <div class="no mono">§ 04</div>
+      <div class="no mono">§ 05</div>
     </div>
     <div class="gallery-grid rv">
       <div class="gallery-item">
@@ -605,13 +823,38 @@
   </div>
 </div>
 
+<!-- SHARE SECTION -->
+<div class="share-section">
+  <div class="wrap">
+    <div class="share-label">Spread the word</div>
+    <div class="share-buttons">
+      <button class="share-btn" onclick="shareTwitter()">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Share on X
+      </button>
+      <button class="share-btn" onclick="shareFacebook()">
+        <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+        Share on Facebook
+      </button>
+      <button class="share-btn" onclick="shareWhatsApp()">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Share on WhatsApp
+      </button>
+      <button class="share-btn" onclick="copyLink()">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy Link
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- FAQ SECTION -->
 <section class="block" id="faq">
   <div class="wrap">
     <div class="sec-head rv">
       <h2>Frequently Asked Questions</h2>
       <div class="line"></div>
-      <div class="no mono">§ 05</div>
+      <div class="no mono">§ 06</div>
     </div>
     <div class="faq-list rv">
       <div class="faq-item">
@@ -731,6 +974,28 @@
   // Year in footer
   document.getElementById('yr').textContent = new Date().getFullYear();
 
+  // Theme toggle with localStorage persistence
+  const themeToggle = document.querySelector('.theme-toggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  function setTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+  
+  // Check for saved preference or system preference
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    setTheme(savedTheme === 'dark');
+  } else if (prefersDark.matches) {
+    setTheme(true);
+  }
+  
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    setTheme(!isDark);
+  });
+
   // Mobile menu toggle
   const menuBtn = document.querySelector('.menu-btn');
   const nav = document.querySelector('.topbar nav');
@@ -793,11 +1058,11 @@
     });
   });
 
-  // Upcoming fixtures (sample data - these would be updated manually or via API)
+  // Upcoming fixtures (sample data)
   const fixtures = [
     { date: 'Sat 12 Oct · 15:00', home: 'Arsenal', away: 'Southampton', comp: 'Premier League', isHome: true },
     { date: 'Wed 23 Oct · 20:00', home: 'Arsenal', away: 'Shakhtar Donetsk', comp: 'Champions League', isHome: true },
-    { date: 'Sun 27 Oct · 16:30', home: 'Arsenal', away: 'Liverpool', comp: 'Premier League', isHome: false },
+    { date: 'Sun 27 Oct · 16:30', home: 'Liverpool', away: 'Arsenal', comp: 'Premier League', isHome: false },
     { date: 'Sat 2 Nov · 15:00', home: 'Newcastle', away: 'Arsenal', comp: 'Premier League', isHome: false },
     { date: 'Wed 6 Nov · 20:00', home: 'Inter Milan', away: 'Arsenal', comp: 'Champions League', isHome: false },
     { date: 'Sat 9 Nov · 17:30', home: 'Arsenal', away: 'Chelsea', comp: 'Premier League', isHome: true },
@@ -817,7 +1082,7 @@
   });
 
   // Countdown timer to next match
-  const nextMatchDate = new Date('2026-10-12T15:00:00+01:00'); // First fixture
+  const nextMatchDate = new Date('2026-10-12T15:00:00+01:00');
   const nextOpponent = 'Southampton';
   
   function updateCountdown() {
@@ -847,6 +1112,117 @@
   
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  // Member counter animation
+  const memberTarget = 47; // Simulated count
+  const memberCount = document.getElementById('member-count');
+  let currentCount = 0;
+  
+  const countObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && currentCount === 0) {
+      const increment = memberTarget / 50;
+      const timer = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= memberTarget) {
+          currentCount = memberTarget;
+          clearInterval(timer);
+        }
+        memberCount.textContent = Math.floor(currentCount);
+      }, 30);
+      countObserver.unobserve(entries[0].target);
+    }
+  }, { threshold: 0.5 });
+  countObserver.observe(document.querySelector('.member-counter'));
+
+  // Share functions
+  const shareUrl = encodeURIComponent(window.location.href);
+  const shareText = encodeURIComponent('Carrickfergus Arsenal Supporters\' Club is back! Join the founding group.');
+  
+  function shareTwitter() {
+    window.open(`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`, '_blank', 'width=550,height=420');
+  }
+  
+  function shareFacebook() {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank', 'width=550,height=420');
+  }
+  
+  function shareWhatsApp() {
+    window.open(`https://wa.me/?text=${shareText}%20${shareUrl}`, '_blank');
+  }
+  
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = event.target.closest('.share-btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Copied!';
+      setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+    });
+  }
+
+  // Confetti animation
+  const confettiCanvas = document.getElementById('confetti-canvas');
+  const confettiCtx = confettiCanvas.getContext('2d');
+  let confettiPieces = [];
+  let confettiAnimating = false;
+  
+  function resizeConfetti() {
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
+  resizeConfetti();
+  window.addEventListener('resize', resizeConfetti);
+  
+  function createConfetti() {
+    const colors = ['#c8151b', '#f1e9d9', '#161310', '#c9a227'];
+    for (let i = 0; i < 150; i++) {
+      confettiPieces.push({
+        x: Math.random() * confettiCanvas.width,
+        y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+        size: Math.random() * 10 + 5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speedY: Math.random() * 3 + 2,
+        speedX: Math.random() * 2 - 1,
+        rotation: Math.random() * 360,
+        rotationSpeed: Math.random() * 10 - 5
+      });
+    }
+  }
+  
+  function animateConfetti() {
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    let stillVisible = false;
+    
+    confettiPieces.forEach(p => {
+      p.y += p.speedY;
+      p.x += p.speedX;
+      p.rotation += p.rotationSpeed;
+      
+      if (p.y < confettiCanvas.height + 20) {
+        stillVisible = true;
+        confettiCtx.save();
+        confettiCtx.translate(p.x, p.y);
+        confettiCtx.rotate(p.rotation * Math.PI / 180);
+        confettiCtx.fillStyle = p.color;
+        confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size / 2);
+        confettiCtx.restore();
+      }
+    });
+    
+    if (stillVisible) {
+      requestAnimationFrame(animateConfetti);
+    } else {
+      confettiAnimating = false;
+      confettiPieces = [];
+    }
+  }
+  
+  function triggerConfetti() {
+    if (!confettiAnimating) {
+      confettiAnimating = true;
+      createConfetti();
+      animateConfetti();
+    }
+  }
 
   // Form validation and submission
   const joinForm = document.getElementById('join-form');
@@ -898,6 +1274,11 @@
         joinForm.reset();
         joinStatus.className = 'note mono ok';
         joinStatus.textContent = "Thanks — you're on the list. We'll be in touch once the first match day is confirmed.";
+        triggerConfetti();
+        
+        // Update member count
+        const currentCount = parseInt(memberCount.textContent);
+        memberCount.textContent = currentCount + 1;
       } else {
         throw new Error('Formspree returned an error');
       }
@@ -912,6 +1293,18 @@
   // Remove error state on input
   document.querySelectorAll('.fill').forEach(input => {
     input.addEventListener('input', () => input.classList.remove('error'));
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Press 'D' to toggle dark mode
+    if (e.key === 'd' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      themeToggle.click();
+    }
+    // Press 'T' to go to top
+    if (e.key === 't' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   });
 </script>
 </body>
