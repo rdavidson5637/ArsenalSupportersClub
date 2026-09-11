@@ -16,8 +16,47 @@
 <meta name="twitter:description" content="Reviving the Reds of Carrick. Join the founding group.">
 <meta name="theme-color" content="#c8151b">
 
+<!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CASC">
+
 <!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23c8151b'/><text x='50' y='68' text-anchor='middle' font-size='50' font-family='Arial Black' fill='white'>A</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%23c8151b'/><text x='90' y='125' text-anchor='middle' font-size='100' font-family='Arial Black' fill='white'>A</text></svg>">
+
+<!-- Structured Data / JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  "name": "Carrickfergus Arsenal Supporters' Club",
+  "alternateName": "CASC",
+  "description": "An independent supporters' club reviving Arsenal's home in Carrickfergus, Co. Antrim.",
+  "url": "https://carrickarsenal.co.uk",
+  "foundingDate": "2026",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "22 Middle Road",
+    "addressLocality": "Carrickfergus",
+    "addressRegion": "Co. Antrim",
+    "postalCode": "BT38 9DN",
+    "addressCountry": "GB"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 54.7158,
+    "longitude": -5.8089
+  },
+  "sameAs": [],
+  "sport": "Association Football",
+  "parentOrganization": {
+    "@type": "SportsTeam",
+    "name": "Arsenal Football Club"
+  }
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,8 +86,25 @@
     --faint:rgba(232,228,220,.14);
   }
   
+  /* Reduced motion support */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+  
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  
+  /* Reading progress bar */
+  .progress-bar{
+    position:fixed;top:0;left:0;height:3px;width:0%;
+    background:linear-gradient(90deg,var(--red),var(--gold));
+    z-index:9999;transition:width .1s linear;
+  }
   body{
     background:var(--paper);
     color:var(--ink);
@@ -523,6 +579,110 @@
   }
   @keyframes spin{to{transform:rotate(360deg)}}
 
+  /* Cookie consent banner */
+  .cookie-banner{
+    position:fixed;bottom:0;left:0;right:0;
+    background:var(--ink);color:var(--paper);
+    padding:16px 28px;z-index:9997;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:20px;flex-wrap:wrap;
+    transform:translateY(100%);transition:transform .3s ease;
+    box-shadow:0 -4px 20px rgba(0,0,0,.2);
+  }
+  .cookie-banner.visible{transform:translateY(0)}
+  .cookie-banner p{
+    font-family:'Space Mono',monospace;font-size:12px;
+    max-width:700px;line-height:1.5;
+  }
+  .cookie-banner a{color:var(--red);text-decoration:underline}
+  .cookie-btns{display:flex;gap:12px;flex-shrink:0}
+  .cookie-btn{
+    font-family:'Space Mono',monospace;font-size:11px;
+    text-transform:uppercase;letter-spacing:.08em;
+    padding:10px 20px;border:none;cursor:pointer;
+    transition:background .15s;
+  }
+  .cookie-btn.accept{background:var(--red);color:var(--paper)}
+  .cookie-btn.accept:hover{background:#e01920}
+  .cookie-btn.decline{background:transparent;color:var(--paper);border:1px solid var(--paper)}
+  .cookie-btn.decline:hover{background:rgba(255,255,255,.1)}
+
+  /* Sticky mobile CTA */
+  .sticky-cta{
+    display:none;position:fixed;bottom:0;left:0;right:0;
+    background:var(--red);color:var(--paper);
+    padding:14px 20px;z-index:55;text-align:center;
+    font-family:'Bebas Neue';font-size:18px;letter-spacing:.06em;
+    box-shadow:0 -4px 20px rgba(0,0,0,.2);
+    transform:translateY(100%);transition:transform .3s ease;
+  }
+  .sticky-cta.visible{transform:translateY(0)}
+  .sticky-cta a{color:inherit;display:flex;align-items:center;justify-content:center;gap:8px}
+  @media(max-width:600px){
+    .sticky-cta{display:block}
+    .cookie-banner.visible~.sticky-cta{transform:translateY(calc(-100% - 60px))}
+  }
+
+  /* Animated crest */
+  .crest-box svg{transition:transform .3s ease}
+  .crest-box:hover svg{transform:scale(1.05) rotate(2deg)}
+  .crest-box svg path[fill="#c8151b"]{transition:fill .3s}
+  .crest-box:hover svg path[fill="#c8151b"]{fill:#e01920}
+
+  /* Easter egg overlay */
+  .easter-egg{
+    position:fixed;inset:0;background:rgba(200,21,27,.95);
+    z-index:99999;display:flex;align-items:center;justify-content:center;
+    flex-direction:column;opacity:0;visibility:hidden;
+    transition:opacity .5s,visibility .5s;
+  }
+  .easter-egg.active{opacity:1;visibility:visible}
+  .easter-egg h2{
+    font-family:'Bebas Neue';font-size:clamp(40px,10vw,100px);
+    color:#fff;text-align:center;line-height:1;margin-bottom:20px;
+    animation:pulse 1s ease infinite;
+  }
+  .easter-egg p{
+    font-family:'Space Mono',monospace;font-size:14px;
+    color:rgba(255,255,255,.8);text-align:center;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+  /* Form autosave indicator */
+  .autosave-indicator{
+    position:absolute;top:10px;right:10px;
+    font-family:'Space Mono',monospace;font-size:10px;
+    color:var(--ink-soft);opacity:0;transition:opacity .3s;
+  }
+  .autosave-indicator.visible{opacity:1}
+
+  /* Install PWA prompt */
+  .pwa-prompt{
+    position:fixed;bottom:90px;right:20px;
+    background:var(--ink);color:var(--paper);
+    padding:16px 20px;border-radius:8px;
+    box-shadow:0 4px 20px rgba(0,0,0,.3);
+    z-index:56;max-width:280px;
+    transform:translateY(20px);opacity:0;
+    transition:transform .3s,opacity .3s;
+    display:none;
+  }
+  .pwa-prompt.visible{transform:translateY(0);opacity:1;display:block}
+  .pwa-prompt h4{
+    font-family:'Bebas Neue';font-size:18px;margin-bottom:8px;
+  }
+  .pwa-prompt p{
+    font-family:'Space Mono',monospace;font-size:11px;
+    color:var(--ink-soft);margin-bottom:12px;line-height:1.4;
+  }
+  .pwa-prompt-btns{display:flex;gap:10px}
+  .pwa-prompt-btns button{
+    flex:1;padding:10px;font-family:'Space Mono',monospace;
+    font-size:11px;border:none;cursor:pointer;
+  }
+  .pwa-prompt-btns .install{background:var(--red);color:#fff}
+  .pwa-prompt-btns .dismiss{background:var(--paper-2);color:var(--ink)}
+
   /* ---------- PRINT STYLES ---------- */
   @media print{
     *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
@@ -543,11 +703,20 @@
 </head>
 <body id="top">
 
+<!-- Reading Progress Bar -->
+<div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
+
 <!-- Confetti Canvas -->
 <canvas id="confetti-canvas"></canvas>
 
 <!-- Skip link for accessibility -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Easter Egg Overlay -->
+<div class="easter-egg" id="easter-egg">
+  <h2>VICTORIA<br>CONCORDIA<br>CRESCIT</h2>
+  <p>Victory Through Harmony · Click anywhere to close</p>
+</div>
 
 <!-- NEWS TICKER -->
 <div class="news-ticker" aria-hidden="true">
@@ -970,6 +1139,30 @@
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
 </button>
 
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#join">Register Your Interest ▸</a>
+</div>
+
+<!-- Cookie Consent Banner -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie consent">
+  <p>We use cookies to remember your preferences (like dark mode) and improve your experience. No tracking, no ads — just the essentials. <a href="#faq">Learn more</a></p>
+  <div class="cookie-btns">
+    <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
+    <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
+  </div>
+</div>
+
+<!-- PWA Install Prompt -->
+<div class="pwa-prompt" id="pwa-prompt">
+  <h4>Install CASC</h4>
+  <p>Add to your home screen for quick access to match days and updates.</p>
+  <div class="pwa-prompt-btns">
+    <button class="dismiss" onclick="dismissPWA()">Later</button>
+    <button class="install" onclick="installPWA()">Install</button>
+  </div>
+</div>
+
 <script>
   // Year in footer
   document.getElementById('yr').textContent = new Date().getFullYear();
@@ -1306,6 +1499,146 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
+
+  // Reading progress bar
+  const progressBar = document.getElementById('progress-bar');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  // Sticky mobile CTA
+  const stickyCta = document.getElementById('sticky-cta');
+  const joinSection = document.getElementById('join');
+  function updateStickyCta() {
+    if (window.innerWidth > 600) return;
+    const joinRect = joinSection.getBoundingClientRect();
+    const isJoinVisible = joinRect.top < window.innerHeight && joinRect.bottom > 0;
+    stickyCta.classList.toggle('visible', window.scrollY > 300 && !isJoinVisible);
+  }
+  window.addEventListener('scroll', updateStickyCta);
+  window.addEventListener('resize', updateStickyCta);
+
+  // Cookie consent
+  const cookieBanner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('cookieConsent')) {
+    setTimeout(() => cookieBanner.classList.add('visible'), 2000);
+  }
+  
+  function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    cookieBanner.classList.remove('visible');
+  }
+  
+  function declineCookies() {
+    localStorage.setItem('cookieConsent', 'declined');
+    cookieBanner.classList.remove('visible');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('formData');
+  }
+
+  // Form autosave
+  const formFields = ['f-name', 'f-town', 'f-email', 'f-since'];
+  
+  function saveFormData() {
+    if (localStorage.getItem('cookieConsent') !== 'accepted') return;
+    const data = {};
+    formFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value) data[id] = el.value;
+    });
+    if (Object.keys(data).length > 0) {
+      localStorage.setItem('formData', JSON.stringify(data));
+    }
+  }
+  
+  function loadFormData() {
+    const saved = localStorage.getItem('formData');
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        formFields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && data[id]) el.value = data[id];
+        });
+      } catch (e) {}
+    }
+  }
+  
+  formFields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', () => {
+        saveFormData();
+      });
+    }
+  });
+  loadFormData();
+  
+  // Clear form data on successful submission
+  const originalReset = joinForm.reset.bind(joinForm);
+  joinForm.reset = function() {
+    originalReset();
+    localStorage.removeItem('formData');
+  };
+
+  // Easter egg - Konami code
+  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let konamiIndex = 0;
+  const easterEgg = document.getElementById('easter-egg');
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === konamiCode[konamiIndex]) {
+      konamiIndex++;
+      if (konamiIndex === konamiCode.length) {
+        easterEgg.classList.add('active');
+        triggerConfetti();
+        konamiIndex = 0;
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+  
+  easterEgg.addEventListener('click', () => {
+    easterEgg.classList.remove('active');
+  });
+
+  // PWA install prompt
+  let deferredPrompt;
+  const pwaPrompt = document.getElementById('pwa-prompt');
+  
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!localStorage.getItem('pwaDismissed')) {
+      setTimeout(() => pwaPrompt.classList.add('visible'), 5000);
+    }
+  });
+  
+  function installPWA() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((result) => {
+        deferredPrompt = null;
+        pwaPrompt.classList.remove('visible');
+      });
+    }
+  }
+  
+  function dismissPWA() {
+    pwaPrompt.classList.remove('visible');
+    localStorage.setItem('pwaDismissed', 'true');
+  }
+
+  // Service Worker registration
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
 </script>
 </body>
 </html>
