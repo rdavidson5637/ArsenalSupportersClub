@@ -1,0 +1,20 @@
+{
+  "name": "Carrickfergus Arsenal Supporters' Club",
+  "short_name": "CASC",
+  "description": "The official programme of the Carrickfergus Arsenal Supporters' Club. Reviving the Reds of Carrick.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f1e9d9",
+  "theme_color": "#c8151b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23c8151b'/><text x='256' y='340' text-anchor='middle' font-size='280' font-family='Arial Black' fill='white'>A</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["sports", "entertainment"],
+  "lang": "en-GB"
+}
