@@ -5,17 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carrickfergus Arsenal Supporters' Club — The Programme</title>
 <meta name="description" content="Carrickfergus had an Arsenal supporters' club once. We're bringing it back. Match days at Carrickfergus Cricket Club. Register your interest.">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Carrickfergus Arsenal Supporters' Club — The Programme">
+<meta property="og:description" content="Carrickfergus had an Arsenal supporters' club once. We're bringing it back. Match days at Carrickfergus Cricket Club. Register your interest.">
+<meta property="og:site_name" content="Carrickfergus Arsenal Supporters' Club">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Carrickfergus Arsenal Supporters' Club">
+<meta name="twitter:description" content="Reviving the Reds of Carrick. Join the founding group.">
+<meta name="theme-color" content="#c8151b">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23c8151b'/><text x='50' y='68' text-anchor='middle' font-size='50' font-family='Arial Black' fill='white'>A</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f1e9d9;      /* warm newsprint */
+    --paper:#f1e9d9;
     --paper-2:#e9dfc9;
-    --ink:#161310;        /* warm near-black */
+    --paper-3:#ddd3c1;
+    --ink:#161310;
     --ink-soft:#4a4238;
-    --red:#c8151b;        /* vintage print red */
+    --red:#c8151b;
     --red-deep:#98070c;
+    --gold:#c9a227;
     --rule:#161310;
     --faint:rgba(22,19,16,.14);
     --maxw:1120px;
@@ -36,6 +52,16 @@
     content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.05;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+  
+  /* Skip link for accessibility */
+  .skip-link{
+    position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+    background:var(--ink);color:var(--paper);padding:12px 24px;z-index:9999;
+    font-family:'Space Mono',monospace;font-size:13px;
+    border-radius:0 0 4px 4px;transition:top .2s;
+  }
+  .skip-link:focus{top:0}
+  
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   .mono{font-family:'Space Mono',monospace}
@@ -48,19 +74,42 @@
     position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);
     border-bottom:2px solid var(--ink);
   }
-  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:42px}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:48px}
   .topbar .mark{font-family:'Bebas Neue';font-size:18px;letter-spacing:.06em}
   .topbar .mark b{color:var(--red)}
-  .topbar nav{display:flex;gap:26px}
+  .topbar nav{display:flex;gap:26px;align-items:center}
   .topbar nav a{font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--paper);opacity:.75;transition:opacity .15s}
   .topbar nav a:hover{opacity:1;color:#fff}
   .topbar nav a.cta{color:var(--red);opacity:1;font-weight:700}
-  @media(max-width:680px){.topbar nav a:not(.cta){display:none}}
+  .topbar nav a.active{opacity:1;color:var(--red)}
+  
+  /* Mobile menu button */
+  .menu-btn{
+    display:none;background:none;border:none;color:var(--paper);
+    cursor:pointer;padding:8px;margin-right:-8px;
+  }
+  .menu-btn svg{width:24px;height:24px}
+  @media(max-width:780px){
+    .menu-btn{display:block}
+    .topbar nav{
+      position:fixed;top:48px;left:0;right:0;bottom:0;
+      background:var(--ink);flex-direction:column;
+      padding:40px 28px;gap:0;
+      transform:translateX(100%);transition:transform .3s ease;
+    }
+    .topbar nav.open{transform:translateX(0)}
+    .topbar nav a{
+      font-size:18px;padding:16px 0;opacity:1;
+      border-bottom:1px solid rgba(241,233,217,.1);width:100%;
+    }
+    .topbar nav a.cta{border-bottom:none;margin-top:20px;text-align:center;
+      background:var(--red);padding:18px 30px;font-size:16px}
+  }
 
   /* ---------- MASTHEAD / NAMEPLATE ---------- */
   .masthead{padding:26px 0 0}
   .masthead .rule-top{border-top:5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
-  .kicker-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:11px}
+  .kicker-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:11px;flex-wrap:wrap;gap:8px}
   .kicker-row span{white-space:nowrap}
   .nameplate{text-align:center;padding:14px 0 10px;border-bottom:1.5px solid var(--ink)}
   .nameplate .over{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
@@ -69,10 +118,31 @@
     font-size:clamp(38px,9vw,120px);line-height:.86;letter-spacing:.01em;
   }
   .nameplate h1 .red{-webkit-text-stroke:0;color:var(--red)}
-  .nameplate .under{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px;font-size:11px;color:var(--ink-soft)}
+  .nameplate .under{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px;font-size:11px;color:var(--ink-soft);flex-wrap:wrap}
   .nameplate .under .star{color:var(--red)}
   .thin-rule{border-top:1px solid var(--ink);margin-top:2px}
   .double-rule{height:4px;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);margin-top:3px}
+
+  /* ---------- COUNTDOWN TICKER ---------- */
+  .countdown-bar{
+    background:var(--red);color:var(--paper);
+    text-align:center;padding:14px 20px;
+    font-family:'Space Mono',monospace;font-size:12px;
+    letter-spacing:.1em;text-transform:uppercase;
+  }
+  .countdown-bar .next-match{margin-bottom:6px;opacity:.85}
+  .countdown-bar .timer{
+    display:flex;justify-content:center;gap:20px;flex-wrap:wrap;
+  }
+  .countdown-bar .timer-block{display:flex;flex-direction:column;align-items:center}
+  .countdown-bar .timer-num{
+    font-family:'Bebas Neue';font-size:32px;line-height:1;letter-spacing:.02em;
+  }
+  .countdown-bar .timer-label{font-size:9px;opacity:.7;margin-top:2px}
+  .countdown-bar .opponent{
+    font-family:'Bebas Neue';font-size:18px;letter-spacing:.05em;margin-top:8px;
+  }
+  .countdown-bar .opponent span{opacity:.7;font-family:'Space Mono',monospace;font-size:11px}
 
   /* ---------- LEAD STORY ---------- */
   .lead{padding:44px 0 30px}
@@ -102,12 +172,44 @@
   .crest-box .est{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--ink-soft);margin-top:8px}
   .halftone{margin-top:16px;height:8px;background-image:radial-gradient(var(--red) 1.1px,transparent 1.3px);background-size:6px 6px;opacity:.8}
 
-  /* ---------- FIXTURES / DETAILS ---------- */
+  /* ---------- FIXTURES SECTION ---------- */
   section.block{padding:8px 0 46px}
   .sec-head{display:flex;align-items:center;gap:16px;margin:34px 0 22px}
   .sec-head h2{font-family:'Bebas Neue';font-size:clamp(26px,4vw,40px);letter-spacing:.03em;white-space:nowrap}
   .sec-head .line{flex:1;border-top:2px solid var(--ink)}
   .sec-head .no{font-family:'Space Mono',monospace;font-size:12px;color:var(--red)}
+  
+  /* Fixture Cards */
+  .fixtures-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;
+    margin-bottom:30px;
+  }
+  .fixture-card{
+    background:var(--paper-2);border:2px solid var(--ink);padding:20px;
+    position:relative;transition:transform .15s,box-shadow .15s;
+  }
+  .fixture-card:hover{transform:translateY(-3px);box-shadow:4px 4px 0 var(--ink)}
+  .fixture-card .date{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;
+  }
+  .fixture-card .teams{
+    font-family:'Bebas Neue';font-size:22px;letter-spacing:.02em;line-height:1.1;
+  }
+  .fixture-card .teams .vs{color:var(--red);font-size:16px;margin:0 4px}
+  .fixture-card .comp{
+    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--red);margin-top:10px;
+    padding:4px 8px;background:rgba(200,21,27,.08);display:inline-block;
+  }
+  .fixture-card .home-away{
+    position:absolute;top:16px;right:16px;
+    font-family:'Bebas Neue';font-size:13px;letter-spacing:.08em;
+    color:var(--paper);background:var(--ink);padding:4px 10px 2px;
+  }
+  .fixture-card .home-away.home{background:var(--red)}
+  
+  /* Details listing */
   .listing{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
   .row{display:flex;align-items:baseline;gap:12px;padding:15px 4px;border-bottom:1px solid var(--faint)}
   .row:last-child{border-bottom:none}
@@ -116,6 +218,82 @@
   .row .val{font-size:15.5px;color:#241f18;flex:0 0 auto;max-width:56%;text-align:right}
   .row .val b{font-style:italic}
   @media(max-width:600px){.row{flex-wrap:wrap}.row .val{text-align:left;max-width:100%}.row .dots{display:none}}
+
+  /* ---------- HISTORY TIMELINE ---------- */
+  .timeline{position:relative;padding:20px 0;margin:20px 0}
+  .timeline::before{
+    content:"";position:absolute;left:20px;top:0;bottom:0;width:3px;
+    background:linear-gradient(var(--ink) 0%,var(--ink) 50%,var(--red) 100%);
+  }
+  @media(min-width:700px){.timeline::before{left:50%;transform:translateX(-50%)}}
+  .timeline-item{
+    position:relative;padding:0 0 30px 50px;
+  }
+  @media(min-width:700px){
+    .timeline-item{width:50%;padding:0 40px 30px 0}
+    .timeline-item:nth-child(even){margin-left:50%;padding:0 0 30px 40px}
+  }
+  .timeline-item::before{
+    content:"";position:absolute;left:12px;top:6px;width:18px;height:18px;
+    background:var(--paper);border:3px solid var(--ink);border-radius:50%;
+  }
+  @media(min-width:700px){
+    .timeline-item::before{left:auto;right:-9px}
+    .timeline-item:nth-child(even)::before{right:auto;left:-9px}
+  }
+  .timeline-item.highlight::before{background:var(--red);border-color:var(--red)}
+  .timeline-year{
+    font-family:'Bebas Neue';font-size:28px;color:var(--red);letter-spacing:.03em;
+  }
+  .timeline-title{font-family:'Bebas Neue';font-size:20px;letter-spacing:.02em;margin:4px 0}
+  .timeline-text{font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+
+  /* ---------- GALLERY PLACEHOLDER ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;
+  }
+  .gallery-item{
+    aspect-ratio:4/3;background:var(--paper-2);border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;position:relative;overflow:hidden;
+    transition:transform .15s;
+  }
+  .gallery-item:hover{transform:scale(1.02)}
+  .gallery-item .placeholder-icon{
+    font-size:32px;color:var(--ink);opacity:.3;margin-bottom:8px;
+  }
+  .gallery-item .placeholder-text{
+    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .gallery-coming{
+    text-align:center;margin-top:24px;padding:20px;
+    background:var(--paper-2);border:2px dashed var(--ink);
+  }
+  .gallery-coming p{font-size:15px;color:var(--ink-soft);margin-bottom:12px}
+
+  /* ---------- FAQ ACCORDION ---------- */
+  .faq-list{border-top:2px solid var(--ink)}
+  .faq-item{border-bottom:1px solid var(--faint)}
+  .faq-q{
+    width:100%;background:none;border:none;text-align:left;
+    padding:20px 50px 20px 4px;cursor:pointer;position:relative;
+    font-family:'Bebas Neue';font-size:20px;letter-spacing:.02em;color:var(--ink);
+    transition:color .15s;
+  }
+  .faq-q:hover{color:var(--red)}
+  .faq-q::after{
+    content:"+";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+    font-family:'Space Mono',monospace;font-size:20px;color:var(--red);
+    transition:transform .2s;
+  }
+  .faq-item.open .faq-q::after{transform:translateY(-50%) rotate(45deg)}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    padding:0 4px;
+  }
+  .faq-item.open .faq-a{max-height:300px}
+  .faq-a-inner{padding:0 0 20px;font-size:15px;color:var(--ink-soft);line-height:1.6}
 
   /* ---------- PULL QUOTE BAND ---------- */
   .band{background:var(--red);color:var(--paper);text-align:center;padding:54px 0;margin:10px 0 0;position:relative}
@@ -145,6 +323,8 @@
   }
   .field .fill::placeholder{color:var(--ink-soft);opacity:.6;font-family:'Space Mono',monospace;font-size:12px}
   .field .fill:focus{outline:none;border-bottom-color:var(--red)}
+  .field .fill.error{border-bottom-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
   .apply{margin-top:8px}
   #join-status{min-height:1.4em}
   #join-status.ok{color:var(--red-deep)}
@@ -170,26 +350,80 @@
   .colophon p{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
   .colophon .links a{font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:7px;color:var(--ink)}
   .colophon .links a:hover{color:var(--red)}
+  
+  /* Social links */
+  .social-links{display:flex;gap:12px;margin-top:16px}
+  .social-links a{
+    width:40px;height:40px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s,border-color .15s;
+  }
+  .social-links a:hover{background:var(--red);border-color:var(--red)}
+  .social-links a:hover svg{fill:var(--paper)}
+  .social-links svg{width:20px;height:20px;fill:var(--ink)}
+  
   .smallprint{margin-top:26px;padding-top:16px;border-top:1px solid var(--faint);font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;line-height:1.6}
+
+  /* Back to top button */
+  .back-to-top{
+    position:fixed;bottom:30px;right:30px;width:50px;height:50px;
+    background:var(--ink);color:var(--paper);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,background .15s;
+    z-index:50;box-shadow:2px 2px 8px rgba(0,0,0,.2);
+  }
+  .back-to-top.visible{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--red)}
+  .back-to-top svg{width:24px;height:24px}
+  @media(max-width:600px){.back-to-top{bottom:20px;right:20px;width:44px;height:44px}}
 
   /* reveal (subtle, print-appropriate) */
   .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
   .rv.in{opacity:1;transform:none}
+  
+  /* Loading spinner */
+  .spinner{
+    display:inline-block;width:16px;height:16px;
+    border:2px solid var(--paper);border-top-color:transparent;
+    border-radius:50%;animation:spin .8s linear infinite;
+    vertical-align:middle;margin-right:8px;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body id="top">
 
+<!-- Skip link for accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <!-- TOP BAR -->
-<div class="topbar">
+<header class="topbar" role="banner">
   <div class="wrap">
     <div class="mark">C<b>A</b>SC · THE PROGRAMME</div>
-    <nav>
+    <nav role="navigation" aria-label="Main navigation">
       <a href="#story">The Story</a>
+      <a href="#fixtures">Fixtures</a>
       <a href="#details">Match Days</a>
-      <a href="#join">Membership</a>
+      <a href="#history">History</a>
+      <a href="#faq">FAQ</a>
       <a class="cta" href="#join">Register ▸</a>
     </nav>
+    <button class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+    </button>
   </div>
+</header>
+
+<!-- COUNTDOWN TICKER -->
+<div class="countdown-bar" role="complementary" aria-label="Next match countdown">
+  <div class="next-match">Next Match</div>
+  <div class="timer" id="countdown-timer">
+    <div class="timer-block"><span class="timer-num" id="cd-days">--</span><span class="timer-label">Days</span></div>
+    <div class="timer-block"><span class="timer-num" id="cd-hours">--</span><span class="timer-label">Hours</span></div>
+    <div class="timer-block"><span class="timer-num" id="cd-mins">--</span><span class="timer-label">Mins</span></div>
+    <div class="timer-block"><span class="timer-num" id="cd-secs">--</span><span class="timer-label">Secs</span></div>
+  </div>
+  <div class="opponent" id="next-opponent">Arsenal <span>vs</span> —</div>
 </div>
 
 <!-- MASTHEAD -->
@@ -215,12 +449,15 @@
   </div>
 </div>
 
+<!-- MAIN CONTENT -->
+<main id="main-content">
+
 <!-- LEAD STORY -->
-<div class="lead">
+<div class="lead" id="story">
   <div class="wrap lead-grid">
     <article>
       <span class="stamp rv">Revival · Vol. I</span>
-      <h1 class="headline rv">Carrickfergus had an Arsenal club once. <span class="u">We're bringing it back.</span></h1>
+      <h2 class="headline rv">Carrickfergus had an Arsenal club once. <span class="u">We're bringing it back.</span></h2>
       <div class="byline rv">A note from the founders · Carrickfergus · Season 2026/27</div>
       <div class="article rv">
         <p>Years ago, this town had its own recognised Arsenal supporters' club, run by a local Gooner named Fred. Somewhere along the line it quietly wound down — and Carrickfergus has been without a home for its Arsenal supporters ever since.</p>
@@ -244,13 +481,30 @@
   </div>
 </div>
 
-<!-- DETAILS / FIXTURES -->
+<!-- UPCOMING FIXTURES -->
+<section class="block" id="fixtures">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Upcoming Fixtures</h2>
+      <div class="line"></div>
+      <div class="no mono">§ 01</div>
+    </div>
+    <div class="fixtures-grid rv" id="fixtures-grid">
+      <!-- Fixtures will be populated by JS -->
+    </div>
+    <p class="mono" style="text-align:center;font-size:12px;color:var(--ink-soft);margin-top:10px">
+      Fixtures subject to change. All times UK. Join us at the clubhouse for every game.
+    </p>
+  </div>
+</section>
+
+<!-- DETAILS / MATCH DAYS -->
 <section class="block" id="details">
   <div class="wrap">
     <div class="sec-head rv">
       <h2>The Match-Day Details</h2>
       <div class="line"></div>
-      <div class="no mono">§ 01</div>
+      <div class="no mono">§ 02</div>
     </div>
     <div class="listing rv">
       <div class="row">
@@ -277,6 +531,72 @@
   </div>
 </section>
 
+<!-- HISTORY TIMELINE -->
+<section class="block" id="history">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Our History</h2>
+      <div class="line"></div>
+      <div class="no mono">§ 03</div>
+    </div>
+    <div class="timeline rv">
+      <div class="timeline-item">
+        <div class="timeline-year">1990s</div>
+        <div class="timeline-title">The Original Club</div>
+        <div class="timeline-text">Fred establishes the original Carrickfergus Arsenal Supporters' Club, gathering local Gooners together for match days.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2000s</div>
+        <div class="timeline-title">Glory Years</div>
+        <div class="timeline-text">The club thrives during the Invincibles era. Regular match viewings, away trips to the Emirates, and a growing community.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2010s</div>
+        <div class="timeline-title">Quiet Decline</div>
+        <div class="timeline-text">The club quietly winds down over the years. Carrickfergus is left without an official home for its Arsenal supporters.</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-year">2026</div>
+        <div class="timeline-title">The Revival</div>
+        <div class="timeline-text">We're bringing it back. A new generation picks up the thread, ready to rebuild the club for today's Carrick Gooners.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="block" id="gallery">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Gallery</h2>
+      <div class="line"></div>
+      <div class="no mono">§ 04</div>
+    </div>
+    <div class="gallery-grid rv">
+      <div class="gallery-item">
+        <span class="placeholder-icon">📸</span>
+        <span class="placeholder-text">Match Day Photos</span>
+      </div>
+      <div class="gallery-item">
+        <span class="placeholder-icon">🏟️</span>
+        <span class="placeholder-text">The Clubhouse</span>
+      </div>
+      <div class="gallery-item">
+        <span class="placeholder-icon">👥</span>
+        <span class="placeholder-text">Members</span>
+      </div>
+      <div class="gallery-item">
+        <span class="placeholder-icon">🎉</span>
+        <span class="placeholder-text">Celebrations</span>
+      </div>
+    </div>
+    <div class="gallery-coming rv">
+      <p>Photos coming once we get rolling. Be part of them.</p>
+      <a href="#join" class="btn">Join the Founding Group ▸</a>
+    </div>
+  </div>
+</section>
+
 <!-- PULL QUOTE -->
 <div class="band">
   <div class="wrap">
@@ -284,6 +604,43 @@
     <div class="src">The revival starts here</div>
   </div>
 </div>
+
+<!-- FAQ SECTION -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Frequently Asked Questions</h2>
+      <div class="line"></div>
+      <div class="no mono">§ 05</div>
+    </div>
+    <div class="faq-list rv">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do I need to be a member to attend?</button>
+        <div class="faq-a"><div class="faq-a-inner">Not at all. Everyone is welcome to come along to any match day, whether you're a lifelong Gooner or just curious. Membership gives you a few extras (group chat, socials, voting on club decisions), but the door is open to all.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is there a membership fee?</button>
+        <div class="faq-a"><div class="faq-a-inner">We're working out the details, but any fee will be minimal — just enough to cover basic running costs. This isn't about making money; it's about building a proper club.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Are families welcome?</button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. We want this to be a place where you can bring the kids, introduce them to the club, and share match days together. The venue is family-friendly during our events.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Will you organise trips to the Emirates?</button>
+        <div class="faq-a"><div class="faq-a-inner">That's the dream. Once we have enough members and are officially recognised by Arsenal FC, we'll look at organising away trips. First step is getting the local club up and running.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do I stay updated?</button>
+        <div class="faq-a"><div class="faq-a-inner">Register your interest below and we'll add you to the mailing list. Once we're up and running, you'll join the members' group chat for real-time updates on fixtures and events.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I help out or volunteer?</button>
+        <div class="faq-a"><div class="faq-a-inner">We'd love that. We're looking for people to help with social media, event coordination, and more. Mention it when you register and we'll be in touch.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- MEMBERSHIP COUPON -->
 <section class="coupon-sec" id="join">
@@ -297,10 +654,10 @@
           <p>We're forming the founding group now. Register your interest and we'll tell you the moment the first match day is confirmed. No commitment — just be part of bringing it back.</p>
           <div class="note mono">Prefer email? <a href="mailto:ryan@rdevstudio.co.uk" style="text-decoration:underline">ryan@rdevstudio.co.uk</a></div>
         </div>
-        <form class="fields" id="join-form" action="https://formspree.io/ryan@rdevstudio.co.uk" method="POST">
+        <form class="fields" id="join-form" action="https://formspree.io/ryan@rdevstudio.co.uk" method="POST" novalidate>
           <div class="field">
             <label for="f-name">Name</label>
-            <input class="fill" id="f-name" name="name" type="text" required autocomplete="name">
+            <input class="fill" id="f-name" name="name" type="text" required autocomplete="name" aria-required="true">
           </div>
           <div class="field">
             <label for="f-town">Town</label>
@@ -308,7 +665,7 @@
           </div>
           <div class="field">
             <label for="f-email">Email</label>
-            <input class="fill" id="f-email" name="email" type="email" required autocomplete="email">
+            <input class="fill" id="f-email" name="email" type="email" required autocomplete="email" aria-required="true">
           </div>
           <div class="field">
             <label for="f-since">Since</label>
@@ -325,17 +682,36 @@
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
-<footer>
+<footer role="contentinfo">
   <div class="wrap">
     <div class="colophon">
       <div class="blk">
         <h4>Carrickfergus Arsenal Supporters' Club</h4>
         <p>An independent supporters' club reviving the Arsenal's home in Carrickfergus, Co. Antrim. Printed and published by the founders, for the reds of Carrick.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Follow us on Facebook" title="Facebook (coming soon)">
+            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+          </a>
+          <a href="#" aria-label="Follow us on X/Twitter" title="X/Twitter (coming soon)">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="Follow us on Instagram" title="Instagram (coming soon)">
+            <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+          </a>
+          <a href="mailto:ryan@rdevstudio.co.uk" aria-label="Email us" title="Email us">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
       </div>
       <div class="links">
         <a href="#story">The Story</a>
+        <a href="#fixtures">Fixtures</a>
         <a href="#details">Match Days</a>
+        <a href="#history">History</a>
+        <a href="#faq">FAQ</a>
         <a href="#join">Membership</a>
       </div>
     </div>
@@ -346,25 +722,171 @@
   </div>
 </footer>
 
+<!-- Back to Top Button -->
+<button class="back-to-top" aria-label="Back to top" id="back-to-top">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
 <script>
+  // Year in footer
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // subtle reveals
+  // Mobile menu toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('.topbar nav');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+    menuBtn.innerHTML = isOpen 
+      ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>';
+  });
+  
+  // Close mobile menu when clicking a link
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>';
+    });
+  });
+
+  // Subtle reveals
   const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-  // Registration form -> Formspree, kept on-page (no redirect to a hosted
-  // thank-you page). First submission triggers a one-time confirmation
-  // email to ryan@rdevstudio.co.uk from Formspree - click it once and every
-  // submission after that lands straight in the inbox.
+  // Active nav link highlighting
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.topbar nav a:not(.cta)');
+  const observerNav = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+  sections.forEach(section => observerNav.observe(section));
+
+  // Back to top button
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      document.querySelectorAll('.faq-item').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  });
+
+  // Upcoming fixtures (sample data - these would be updated manually or via API)
+  const fixtures = [
+    { date: 'Sat 12 Oct · 15:00', home: 'Arsenal', away: 'Southampton', comp: 'Premier League', isHome: true },
+    { date: 'Wed 23 Oct · 20:00', home: 'Arsenal', away: 'Shakhtar Donetsk', comp: 'Champions League', isHome: true },
+    { date: 'Sun 27 Oct · 16:30', home: 'Arsenal', away: 'Liverpool', comp: 'Premier League', isHome: false },
+    { date: 'Sat 2 Nov · 15:00', home: 'Newcastle', away: 'Arsenal', comp: 'Premier League', isHome: false },
+    { date: 'Wed 6 Nov · 20:00', home: 'Inter Milan', away: 'Arsenal', comp: 'Champions League', isHome: false },
+    { date: 'Sat 9 Nov · 17:30', home: 'Arsenal', away: 'Chelsea', comp: 'Premier League', isHome: true },
+  ];
+  
+  const fixturesGrid = document.getElementById('fixtures-grid');
+  fixtures.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'fixture-card';
+    card.innerHTML = `
+      <div class="date">${f.date}</div>
+      <div class="teams">${f.home} <span class="vs">v</span> ${f.away}</div>
+      <div class="comp">${f.comp}</div>
+      <div class="home-away ${f.isHome ? 'home' : ''}">${f.isHome ? 'Home' : 'Away'}</div>
+    `;
+    fixturesGrid.appendChild(card);
+  });
+
+  // Countdown timer to next match
+  const nextMatchDate = new Date('2026-10-12T15:00:00+01:00'); // First fixture
+  const nextOpponent = 'Southampton';
+  
+  function updateCountdown() {
+    const now = new Date();
+    const diff = nextMatchDate - now;
+    
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      document.getElementById('next-opponent').innerHTML = '<span>Match Day!</span> Arsenal v ' + nextOpponent;
+      return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('cd-mins').textContent = mins.toString().padStart(2, '0');
+    document.getElementById('cd-secs').textContent = secs.toString().padStart(2, '0');
+    document.getElementById('next-opponent').innerHTML = 'Arsenal <span>v</span> ' + nextOpponent;
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Form validation and submission
   const joinForm = document.getElementById('join-form');
   const joinStatus = document.getElementById('join-status');
+  
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  
   joinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    const nameInput = document.getElementById('f-name');
+    const emailInput = document.getElementById('f-email');
     const btn = joinForm.querySelector('button[type="submit"]');
+    
+    // Clear previous errors
+    nameInput.classList.remove('error');
+    emailInput.classList.remove('error');
+    
+    // Validate
+    let valid = true;
+    if (!nameInput.value.trim()) {
+      nameInput.classList.add('error');
+      valid = false;
+    }
+    if (!emailInput.value.trim() || !validateEmail(emailInput.value)) {
+      emailInput.classList.add('error');
+      valid = false;
+    }
+    
+    if (!valid) {
+      joinStatus.className = 'note mono err';
+      joinStatus.textContent = 'Please fill in all required fields correctly.';
+      return;
+    }
+    
     btn.disabled = true;
     joinStatus.className = 'note mono';
-    joinStatus.textContent = 'Sending…';
+    joinStatus.innerHTML = '<span class="spinner"></span>Sending…';
 
     try {
       const res = await fetch(joinForm.action, {
@@ -385,6 +907,11 @@
     } finally {
       btn.disabled = false;
     }
+  });
+  
+  // Remove error state on input
+  document.querySelectorAll('.fill').forEach(input => {
+    input.addEventListener('input', () => input.classList.remove('error'));
   });
 </script>
 </body>
