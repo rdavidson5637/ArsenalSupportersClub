@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Carrickfergus Arsenal Supporters' Club — The Programme</title>
 <meta name="description" content="Carrickfergus had an Arsenal supporters' club once. We're bringing it back. Match days at Carrickfergus Cricket Club. Register your interest.">
 
@@ -97,7 +97,33 @@
   }
   
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  
+  /* Mobile optimizations */
+  body{
+    -webkit-tap-highlight-color:rgba(200,21,27,.2);
+    touch-action:pan-y;
+  }
+  
+  /* Safe area insets for notched phones */
+  .topbar,.cookie-banner,.sticky-cta{
+    padding-left:max(28px,env(safe-area-inset-left));
+    padding-right:max(28px,env(safe-area-inset-right));
+  }
+  .sticky-cta{padding-bottom:max(14px,env(safe-area-inset-bottom))}
+  .cookie-banner{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+  
+  /* Minimum touch targets (44px) */
+  button,a,.btn,.faq-q,.share-btn,.social-links a{min-height:44px}
+  .faq-q{min-height:54px}
+  
+  /* Better focus states for touch/keyboard */
+  :focus-visible{
+    outline:3px solid var(--red);
+    outline-offset:2px;
+  }
+  button:focus:not(:focus-visible),
+  a:focus:not(:focus-visible){outline:none}
   
   /* Reading progress bar */
   .progress-bar{
@@ -198,16 +224,29 @@
     .topbar nav{
       position:fixed;top:48px;left:0;right:0;bottom:0;
       background:var(--ink);flex-direction:column;
-      padding:40px 28px;gap:0;
+      padding:40px 28px;gap:0;padding-bottom:env(safe-area-inset-bottom);
       transform:translateX(100%);transition:transform .3s ease;
+      overscroll-behavior:contain;
     }
     .topbar nav.open{transform:translateX(0)}
     .topbar nav a{
       font-size:18px;padding:16px 0;opacity:1;
       border-bottom:1px solid rgba(241,233,217,.1);width:100%;
+      min-height:54px;display:flex;align-items:center;
     }
     .topbar nav a.cta{border-bottom:none;margin-top:20px;text-align:center;
-      background:var(--red);padding:18px 30px;font-size:16px}
+      background:var(--red);padding:18px 30px;font-size:16px;justify-content:center}
+  }
+  
+  /* Extra small screens */
+  @media(max-width:380px){
+    .wrap{padding:0 16px}
+    .nameplate h1{font-size:32px}
+    .headline{font-size:28px}
+    .countdown-bar .timer{gap:12px}
+    .countdown-bar .timer-num{font-size:26px}
+    .coupon{padding:24px 20px}
+    .coupon h3{font-size:28px}
   }
 
   /* ---------- MASTHEAD / NAMEPLATE ---------- */
@@ -1208,6 +1247,22 @@
       menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>';
     });
   });
+  
+  // Swipe to close mobile menu
+  let touchStartX = 0;
+  nav.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  
+  nav.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    if (diff > 80 && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>';
+    }
+  }, { passive: true });
 
   // Subtle reveals
   const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
